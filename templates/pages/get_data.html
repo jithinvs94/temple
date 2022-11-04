@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">GET DATA</h2>
+    </div> 
+</section>
+<br>
+{% include 'partials/_alerts.html' %}
+<form action="{% url 'view' %}" method="POST">
+    {% csrf_token %}
+    <div class="card mx-auto" style="max-width:370px; margin-top:50px; margin-bottom:50px;">
+        <article class="card-body">
+            <header class="mb-4"><h6 class="card-title">താഴെ മാസവും വർഷവും നല്കുക</h4></header>
+                <div class="col form-group">
+                    <label>മാസം</label>
+                    <input type="text" name="month" class="form-control" placeholder="" required>
+                </div>
+                <br>
+                <div class="col form-group">
+                    <label>വര്ഷം</label>
+                    <input type="text" name="year" class="form-control" placeholder="" required><br>
+                </div> 
+        </article>
+    </div> 
+    <br>
+    <br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 bg-light text-right">
+            <button type="submit" class="btn btn-primary">Get Data</button>
+        </div>
+    </div>
+</div>
+</form>
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

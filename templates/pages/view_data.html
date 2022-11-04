@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="section-pagetop bg">
+    
+   
+    <h6 class="title text-dark"> &nbsp {{month_year}}</h><br>
+   
+</section>
+
+<table style="width:100%">
+<thead>
+    <tr style="border: 1px solid black;">
+        <th style="text-align: center; border: 1px solid black;">തീയ്യതികൾ</th>
+        {% for vazhipadu in vazhipadu_rates %}
+      <th style="text-align: center; border: 1px solid black;">{{vazhipadu.vazhipadu_name}}</th>
+      {% endfor %}
+      <th style="text-align: center; border: 1px solid black;">ആകെ</th>
+    </tr>
+</thead>
+<tbody>
+    {% for data in data_all %}
+    
+    <tr style="border: 1px solid black; border: 1px solid black;">
+        {% for x in data %}
+        <td style="text-align: center; border: 1px solid black;">{{x}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</tbody>
+  </table>
+
+  <div class="card-body border-top border-bottom">
+    
+
+    <table>
+        <tbody>
+            <tr>
+                
+                <th scope="col" class="text-right" width="750"> </th>
+                <td>
+                    <h6 class="title text-dark">ആകെ തുക</h6>
+                    <!-- <span class="title text-dark">ആകെ തുക</span> -->
+                </td>
+                <th scope="col" class="text-right" width="20"> </th>
+                <td>
+                    <div class="title text-dark"> 
+                        <h6 class="title text-dark"> = </h6> 
+                    </div>
+                </td>
+                <th scope="col" class="text-right" width="20"> </th>
+                <td>
+                    <div class="title text-dark"> 
+                        <h6 class="title text-dark">₹ {{grand_total_sum_var}}</h6> 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+{% endblock %}

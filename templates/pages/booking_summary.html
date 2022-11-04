@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<section class="section-pagetop bg">
+    <div class="container">
+        <h2 class="title-page">നല്കിയ വിവരങ്ങൾ</h2><br>
+        <h6 class="title text-dark">പേര് : {{summary.name}}  &nbsp  &nbsp &nbsp നക്ഷത്രം : {{summary.nakshathram}}</h><br>
+    </div> 
+</section>
+<br>
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <table class="table table-borderless table-shopping-cart">
+                    <thead class="text-muted">
+                        <tr class="small text-uppercase">
+                            <th scope="col">വഴിപാട്</th>
+                            <th scope="col" width="120">എണ്ണം</th>
+                            <th></th>
+                            <th scope="col" width="120">ആകെ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for vazhipadu in vazhipadu_rates %}
+                        {% if vazhipadu.vazhipadu_name in summary.keys %}
+                        <tr>
+                            <td>
+                                <figure class="itemside">
+                                    <figcaption class="info">
+                                        <span href="#" class="title text-dark">{{vazhipadu.vazhipadu_name}}</span>
+                                        <p class="text-muted small">വില : ₹ {{vazhipadu.price}}</p>
+                                    </figcaption>
+                                </figure>
+                            </td>
+                            <td> 
+                                <span class="title text-center text-dark">{% for key, value in summary.items %}
+                                        {% if key == vazhipadu.vazhipadu_name %}
+                                        {{value.0}}
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </td>
+                            <td></td>
+                            <td> 
+                                <div class="price-wrap"> 
+                                    <var class="price">₹ {% for key, value in summary.items %}
+                                        {% if key == vazhipadu.vazhipadu_name %}
+                                        {{value.1}}
+                                        {% endif %}
+                                    {% endfor %}
+                                    </var> 
+                                </div>
+                            </td>
+        
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+                <div class="card-body border-top">
+                    <table>
+                        <tbody>
+                            <tr>
+                                
+                                <th scope="col" class="text-right" width="935"> </th>
+                                <td>
+                                    <span class="title text-dark">ആകെ</span>
+                                </td>
+                                <th scope="col" class="text-right" width="165"> </th>
+                                <td>
+                                    <div class="price-wrap"> 
+                                        <var class="price"> ₹ {{grand_total}}</var> 
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+</section>
+<br>
+<br>
+<form action="{% url 'print' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" id="name" name="name" value="{{ summary.name }}">
+    <input type="hidden" id="nakshathram" name="nakshathram" value="{{ summary.nakshathram }}">
+    {% for vazhipadu in vazhipadu_rates %}
+     {% if vazhipadu.vazhipadu_name in summary.keys %}
+    <input type="hidden" id="vazhipad" name="name_{{vazhipadu.id}}" value="{{ vazhipadu.vazhipadu_name }}">
+    <input type="hidden" id="count" name="count_{{vazhipadu.id}}" value="{% for key,value in summary.items %}{% if key == vazhipadu.vazhipadu_name %}{{value.0}}{% endif %}{% endfor %}">
+    {% endif %}
+    {% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 bg-light text-right">
+            <button type="submit" class="btn btn-primary">Confirm and Print</button>
+        </div>
+    </div>
+</div>
+</form>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section class="page-section portfolio" id="portfolio">
+    <div class="intro-banner-wrap">
+        <img src="{% static '/assets/img/temple/temple.jfif' %}" class="img-fluid rounded">
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">SELECT</h2>
+        <br>
+        <br>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item" >
+                    <a href="{% url 'booking' %}"><img class="img-fluid" src="{% static 'assets/img/home/booking2.png' %}" alt="..."/></a>
+                </div>
+            </div>
+           
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item">
+                    <a href="{% url 'get_data' %}"><img class="img-fluid" src="{% static 'assets/img/home/get_data.png' %}" alt="..."/></a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
